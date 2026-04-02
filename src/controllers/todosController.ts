@@ -6,4 +6,10 @@ const getAllData = async (req:Request,res:Response)=>{
     res.send({message:"You Get All Data"})
 }
 
-export {getAllData}
+const createNewTodo = async(req:Request,res:Response)=>{
+    const {name,description} = req.body
+    const newTodo = await todoModel.createTodo({name,description})
+    res.send({message:newTodo})
+}
+
+export {getAllData,createNewTodo}
