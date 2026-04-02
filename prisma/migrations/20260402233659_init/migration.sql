@@ -1,0 +1,11 @@
+-- CreateTable
+CREATE TABLE "Todo" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Todo_name_key" ON "Todo"("name");
