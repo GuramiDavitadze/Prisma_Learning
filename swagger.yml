@@ -1,0 +1,33 @@
+openapi: '3.0.3'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: http://localhost:3008
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: secret-api-key
+security:
+  - ApiKeyAuth: []
+paths:
+  /api:
+    get:
+      summary: Get All Todos
+      responses:
+        '200':
+          description: List of todos
+        '401':
+          description: Unauthorized
+  /api/:id:
+    get:
+      summary: Get Single Todo
+      responses:
+        '200':
+          description: Single Todo
+        '401':
+          description: Unauthorized
+        '404':
+          description: Todo not found
