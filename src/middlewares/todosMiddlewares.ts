@@ -7,4 +7,18 @@ const checkSecretKey = (req:Request,res:Response,next:NextFunction)=>{
     }
     next()
 }
-export {checkSecretKey}
+
+const checkDataExist = (req:Request,res:Response,next:NextFunction) =>{
+    if(req.body===undefined||req.body.name===undefined|| req.body.description===undefined){
+        return res.status(400).send({message:"Please fill all required data"})
+    }
+    const {name,description} = req.body
+    if(name.trim()===""||description.trim()===""){
+        return res.status(400).send({message:"Please fill all required data"})
+    }
+    next()
+
+   
+    
+}
+export {checkSecretKey,checkDataExist}
