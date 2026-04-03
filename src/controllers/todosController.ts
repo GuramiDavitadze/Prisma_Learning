@@ -42,4 +42,17 @@ const updateTodo = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
-export { getAllData, getSingleTodo, createNewTodo, updateTodo };
+
+const deleteTodo = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const todo = await todoModel.getSingleTodo(Number(id));
+    if (!todo) return res.status(404).json({ message: "Todo not found" });
+    await todoModel.deleteTodo(Number(id));
+    res.json({ message: `Todo with id ${id} deleted successfully` });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export { getAllData, getSingleTodo, createNewTodo, updateTodo, deleteTodo };
