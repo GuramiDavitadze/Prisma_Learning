@@ -21,9 +21,35 @@ paths:
           description: List of todos
         '401':
           description: Unauthorized
-  /api/:id:
+    post:
+      summary: Create New Todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Created Successfully
+        '400':
+          description: Missing Data
+
+        '401': 
+          description: Unauthorized
+  /api/{id}:
     get:
       summary: Get Single Todo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Single Todo
@@ -31,3 +57,46 @@ paths:
           description: Unauthorized
         '404':
           description: Todo not found
+    patch:
+      summary: Update Todo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200': 
+          description: Updated Todo
+        '401':
+          description: Unauthorized
+        '404':
+          description: Todo not found
+    delete:
+      summary: Delete Todo
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deleted Successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Todo not found
+      
+
+
