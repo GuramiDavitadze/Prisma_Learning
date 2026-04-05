@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npx prisma generate
-
 EXPOSE 3008
 
-CMD npx tsx watch index.ts
+CMD npx prisma generate && npx prisma migrate deploy && npx tsx index.ts
