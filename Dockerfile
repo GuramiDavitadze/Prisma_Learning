@@ -1,6 +1,6 @@
 FROM node:24-alpine
 
-WORKDIR /src
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3008
 
-CMD npx tsx index.ts
+CMD npx tsx watch index.ts

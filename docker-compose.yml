@@ -10,6 +10,9 @@ services:
       - API_KEY=1234
     depends_on:
       - db
+    volumes:
+      - .:/app
+      - /app/node_modules
 
   db:
     image: postgres:15-alpine
