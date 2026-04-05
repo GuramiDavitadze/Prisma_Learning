@@ -24,9 +24,16 @@ const getSingleTodo = async (req: Request, res: Response) => {
   }
 };
 const createNewTodo = async (req: Request, res: Response) => {
-  const { name, description } = req.body;
-  const newTodo = await todoModel.createTodo({ name, description });
-  res.json({ message: newTodo });
+  try {
+    const { name, description } = req.body;
+    const newTodo = await todoModel.createTodo({ name, description });
+    res.json({ newTodo });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ message: "Todo name already exists" });
+    }
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 const updateTodo = async (req: Request, res: Response) => {
   try {
@@ -46,11 +53,13 @@ const updateTodo = async (req: Request, res: Response) => {
 const deleteTodo = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const todo = await todoModel.getSingleTodo(Number(id));
-    if (!todo) return res.status(404).json({ message: "Todo not found" });
     await todoModel.deleteTodo(Number(id));
     res.json({ message: `Todo with id ${id} deleted successfully` });
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error.code);
+    if (error.code === "P2025") {
+      return res.status(404).json({ message: "Todo not found" });
+    }
     res.status(500).json({ message: "Something went wrong" });
   }
 };
