@@ -21,6 +21,8 @@ paths:
           description: List of todos
         '401':
           description: Unauthorized
+        '500':
+          description: Internal Server Error
     post:
       summary: Create New Todo
       requestBody:
@@ -38,9 +40,10 @@ paths:
           description: Created Successfully
         '400':
           description: Missing Data
-
         '401': 
           description: Unauthorized
+        '500':
+          description: Internal Server Error
   /api/{id}:
     get:
       summary: Get Single Todo
@@ -57,6 +60,8 @@ paths:
           description: Unauthorized
         '404':
           description: Todo not found
+        '500':
+          description: Internal Server Error
     patch:
       summary: Update Todo
       parameters:
@@ -82,6 +87,8 @@ paths:
           description: Unauthorized
         '404':
           description: Todo not found
+        '500':
+          description: Internal Server Error
     delete:
       summary: Delete Todo
       parameters:
@@ -97,6 +104,8 @@ paths:
           description: Unauthorized
         '404':
           description: Todo not found
+        '500':
+          description: Internal Server Error
       
 
 
